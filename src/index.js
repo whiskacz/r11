@@ -1,17 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client'
+import Title from './components/Title';
+import Button from './components/Button';
+import Popup from './components/Popup';
+import './css/index.css'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+export default function R11App () {
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    const title = "Magic PopUpApp"
+
+    const [popupShow, setPopupShow] = useState(true)
+
+    const handleClose = () => {
+        setPopupShow(!popupShow)
+    }
+ 
+
+
+    useEffect(() => {
+        setTimeout(()=>
+        setPopupShow(true),5000)
+    },[])
+
+    return (
+        <div>
+        <div className='wrapper'>
+            <Title name={title}/>
+            <Button handleClose={handleClose}/>
+        </div>
+            {popupShow ? (<Popup handleClose={handleClose} />) : null}
+
+        </div>
+    )
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<R11App />)
